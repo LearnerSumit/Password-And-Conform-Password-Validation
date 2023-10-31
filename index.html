@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password & Conform Password</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f1f1;
+        }
+        #main{
+            width: 400px;
+            height: 350px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        #main form{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        #main form label{
+            margin: 5px 0;
+        }
+        #main form input{
+            width: 100%;
+            height: 40px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            padding: 0 10px;
+            margin: 5px 0;
+            font-size: 15px;
+        }
+        #alert{
+            font-size: 11px;
+            height: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <form action="login.php" method="post" onsubmit="return validation()">
+            <label for="username">Username</label>
+            <input type="username" name="username">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+            <label for="conform_password">Conform Password</label>
+            <input type="password" name="conform_password" id="conform_password" onkeyup="check(this)">
+            <!-- error message -->
+            <p id="alert" style="color: red; "></p>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+    <script>
+        var password = document.getElementById("password");
+        var conform_password = document.getElementById("conform_password");
+        var alert = document.getElementById("alert");
+        var flag =1;
+        function check(input){
+            if(conform_password.value.length > 0){
+                if(password.value != conform_password.value){
+                    alert.innerHTML = "Password not match";
+                    flag = 0;
+                }else{
+                    alert.innerHTML = "";
+                    flag = 1;
+                }
+            }else{  
+                alert.innerHTML = "Please Enter your Password";
+                flag = 0;
+            }     
+        }
+        function validation(){
+            if(flag == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
